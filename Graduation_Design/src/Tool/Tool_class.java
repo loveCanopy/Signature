@@ -76,7 +76,7 @@ public class Tool_class {
 			long create_K = Main.create_K(create_source, D_seq, create_M_ni);
 			System.out.println("SBֵ" + create_B_sum + ", Kֵ" + create_K);
 			String encoderByMD5 = Main.encoderByMD5(create_K + "");
-			System.out.println(Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum));
+			System.out.println(Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum,L_seq));
 			System.out.println("---------------------------------");
 		}
 

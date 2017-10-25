@@ -74,7 +74,7 @@ public class Main {
 		System.out.println("Bob操作部分");
 		long w_ni = getW_ni(M_W[1], M_W[0]);
 		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
-		System.out.println(get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum));
+		System.out.println(get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum,L_seq));
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class Main {
 		int max = (int) Math.pow(2, N / 0.9408);
 		while (flag) {
 			for (int i = 0; i < N; i++) {
-				A_seq[i] = (long) (Math.random() * min + (max - min));
+				A_seq[i] = (long) (random.nextInt(max - min + 1) + min);
 			}
 			if (get_DA(A_seq) > 0.9408 && get_DA(A_seq) <= 1)
 				flag = false;
@@ -405,7 +405,7 @@ public class Main {
 	/**
 	 * 递归求解K' 使得 H(K)=H(K')
 	 */
-	public static String get_K_ni(long W_ni, long M, long V, long P, long M_ni, long K, long Sb) throws Exception {
+	public static String get_K_ni(long W_ni, long M, long V, long P, long M_ni, long K, long Sb,long[] L_seq) throws Exception {
 		long Sa = (W_ni * Sb) % M;
 		long T = (V * Sa / P) % M_ni;
 		System.out.println("T的值为" + T);
@@ -414,7 +414,9 @@ public class Main {
 		int i = 1;
 		while (l0 <= L_seq[0]) {
 			K1 = (T - l0) % M_ni;
+			
 			l0 = l0 + 1;
+			
 			if (encoderByMD5(K1 + "").equals(encoderByMD5(K + ""))) {
 				System.out.println("比较次数" + i);
 				return K1 + "";
@@ -426,6 +428,7 @@ public class Main {
 
 		while (l1 <= L_seq[1]) {
 			K1 = (T + l1) % M_ni;
+			
 			l1 = l1 + 1;
 			if (encoderByMD5(K1 + "").equals(encoderByMD5(K + ""))) {
 				System.out.println("比较次数" + i);
