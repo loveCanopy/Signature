@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import KEP_SC_5_1.Main;
-
 public class Tool_class {
 
 	public static void main(String[] args) throws Exception {
@@ -30,40 +28,52 @@ public class Tool_class {
 
 		if (methodName.equals("KEP_SC_5_1"))
 			Test_KEP_SC_5_1(set, Number, methodName);
+		if (methodName.equals("KEP_SC_5_1_1")) {
+			Test_KEP_SC_5_1_1(set, Number, methodName);
+		}
+		if (methodName.equals("KEP_SC_5_1_2")) {
+			Test_KEP_SC_5_1_2(set, Number, methodName);
+		}
+		if (methodName.equals("KEP_SC_5_1_3")) {
+			Test_KEP_SC_5_1_3(set, Number, methodName);
+		}
+		if (methodName.equals("KEP_SC_5_1_4")) {
+			Test_KEP_SC_5_1_4(set, Number, methodName);
+		}
 	}
 
 	public static void Test_KEP_SC_5_1(Set<String> set, int N, String methodName) throws Exception {
 
-		long[] A_seq = Main.create_A_seq(N);
+		long[] A_seq = KEP_SC_5_1.Main.create_A_seq(N);
 		System.out.println("生成A序列");
-		Main.print_seq(A_seq);
+		KEP_SC_5_1.Main.print_seq(A_seq);
 		System.out.println("A背包向量的密度");
-		System.out.println(Main.get_DA(A_seq));
+		System.out.println(KEP_SC_5_1.Main.get_DA(A_seq));
 		System.out.println("生成的M值,W值");
-		long[] M_W = Main.createM_W(A_seq);
-		Main.print_seq(M_W);
+		long[] M_W = KEP_SC_5_1.Main.createM_W(A_seq);
+		KEP_SC_5_1.Main.print_seq(M_W);
 		System.out.println("生成的B序列");
-		long[] B_seq = Main.create_B_seq(A_seq, M_W);
-		Main.print_seq(B_seq);
+		long[] B_seq = KEP_SC_5_1.Main.create_B_seq(A_seq, M_W);
+		KEP_SC_5_1.Main.print_seq(B_seq);
 		System.out.println("生成的P值,V值");
-		long[] P_V = Main.createP_V(N);
-		Main.print_seq(P_V);
+		long[] P_V = KEP_SC_5_1.Main.createP_V(N);
+		KEP_SC_5_1.Main.print_seq(P_V);
 		System.out.println("随机生成的delta序列");
-		long[] delta = Main.create_delta(N);
-		Main.print_seq(delta);
+		long[] delta = KEP_SC_5_1.Main.create_delta(N);
+		KEP_SC_5_1.Main.print_seq(delta);
 		System.out.println("生成的C值");
-		long[] C_seq = Main.create_C_seq(N, A_seq, delta, P_V);
-		Main.print_seq(C_seq);
+		long[] C_seq = KEP_SC_5_1.Main.create_C_seq(N, A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(C_seq);
 		System.out.println("生成的M'");
-		long create_M_ni = Main.create_M_ni(N, C_seq);
+		long create_M_ni = KEP_SC_5_1.Main.create_M_ni(N, C_seq);
 		System.out.println(create_M_ni);
 		System.out.println("生成的D值");
-		long[] D_seq = Main.create_D_seq(create_M_ni, C_seq);
-		Main.print_seq(D_seq);
+		long[] D_seq = KEP_SC_5_1.Main.create_D_seq(create_M_ni, C_seq);
+		KEP_SC_5_1.Main.print_seq(D_seq);
 		System.out.println("L0,L1的值");
-		long[] L_seq = Main.create_L_seq(A_seq, delta, P_V);
-		Main.print_seq(L_seq);
-		long w_ni = Main.getW_ni(M_W[1], M_W[0]);
+		long[] L_seq = KEP_SC_5_1.Main.create_L_seq(A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(L_seq);
+		long w_ni = KEP_SC_5_1.Main.getW_ni(M_W[1], M_W[0]);
 		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
 		Thread.sleep(3000);
 		long[] create_source = new long[N];
@@ -71,15 +81,308 @@ public class Tool_class {
 			for (int i = 0; i < str.split(" ").length; i++) {
 				create_source[i] = Long.parseLong(str.split(" ")[i]);
 			}
-			Main.print_seq(create_source);
-			long create_B_sum = Main.create_B_sum(create_source, B_seq);
-			long create_K = Main.create_K(create_source, D_seq, create_M_ni);
+			KEP_SC_5_1.Main.print_seq(create_source);
+			long create_B_sum = KEP_SC_5_1.Main.create_B_sum(create_source, B_seq);
+			long create_K = KEP_SC_5_1.Main.create_K(create_source, D_seq, create_M_ni);
 			System.out.println("SB值" + create_B_sum + ", K值" + create_K);
-			String encoderByMD5 = Main.encoderByMD5(create_K + "");
-			System.out.println(Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum,L_seq));
+			String encoderByMD5 = KEP_SC_5_1.Main.encoderByMD5(create_K + "");
+			System.out.println(
+					KEP_SC_5_1.Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum, L_seq));
 			System.out.println("---------------------------------");
 		}
 
+	}
+
+	public static void Test_KEP_SC_5_1_1(Set<String> set, int N, String methodName) throws Exception {
+		long[] A_seq = KEP_SC_5_1.Main.create_A_seq(N);
+		System.out.println("生成A序列");
+		KEP_SC_5_1.Main.print_seq(A_seq);
+		System.out.println("A背包向量的密度");
+		System.out.println(KEP_SC_5_1.Main.get_DA(A_seq));
+		System.out.println("生成的M值,W值");
+		long[] M_W = KEP_SC_5_1.Main.createM_W(A_seq);
+		KEP_SC_5_1.Main.print_seq(M_W);
+		System.out.println("生成的B序列");
+		long[] B_seq = KEP_SC_5_1.Main.create_B_seq(A_seq, M_W);
+		KEP_SC_5_1.Main.print_seq(B_seq);
+		System.out.println("生成的P值,V值");
+		long[] P_V = KEP_SC_5_1.Main.createP_V(N);
+		KEP_SC_5_1.Main.print_seq(P_V);
+		System.out.println("随机生成的delta序列");
+		long[] delta = KEP_SC_5_1.Main.create_delta(N);
+		KEP_SC_5_1.Main.print_seq(delta);
+		System.out.println("生成的C值");
+		long[] C_seq = KEP_SC_5_1.Main.create_C_seq(N, A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(C_seq);
+		System.out.println("生成的M'");
+		long create_M_ni = KEP_SC_5_1.Main.create_M_ni(N, C_seq);
+		System.out.println(create_M_ni);
+
+		// 不同于KEP_SC_5_1的D值
+		long[] D_seq = KEP_SC_5_1.Main.create_D_seq(create_M_ni, C_seq);
+		long[] E_seq = KEP_SC_5_1_1.Main.create_E_seq(N);
+		System.out.println("生成的E值");
+		KEP_SC_5_1.Main.print_seq(E_seq);
+		System.out.println("生成的D值");
+		long[] D_seq1 = KEP_SC_5_1_1.Main.create_D_seq_1(D_seq, E_seq, create_M_ni);
+		KEP_SC_5_1.Main.print_seq(D_seq1);
+
+		// 不同于KEP_SC_5_1的D值
+		System.out.println("L0,L1的值");
+		long[] L_seq = KEP_SC_5_1_1.Main.create_L_seq(A_seq, delta, P_V, E_seq);
+		KEP_SC_5_1.Main.print_seq(L_seq);
+		long w_ni = KEP_SC_5_1.Main.getW_ni(M_W[1], M_W[0]);
+		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
+		Thread.sleep(3000);
+		long[] create_source = new long[N];
+		for (String str : set) {
+			for (int i = 0; i < str.split(" ").length; i++) {
+				create_source[i] = Long.parseLong(str.split(" ")[i]);
+			}
+			KEP_SC_5_1.Main.print_seq(create_source);
+			long create_B_sum = KEP_SC_5_1.Main.create_B_sum(create_source, B_seq);
+			long create_K = KEP_SC_5_1.Main.create_K(create_source, D_seq1, create_M_ni);
+			System.out.println("SB值" + create_B_sum + ", K值" + create_K);
+			String encoderByMD5 = KEP_SC_5_1.Main.encoderByMD5(create_K + "");
+			System.out.println(
+					KEP_SC_5_1.Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K, create_B_sum, L_seq));
+			System.out.println("---------------------------------");
+		}
+	}
+
+	public static void Test_KEP_SC_5_1_2(Set<String> set, int N, String methodName) throws Exception {
+
+		long[] A_seq = KEP_SC_5_1.Main.create_A_seq(N);
+		System.out.println("生成A序列");
+		KEP_SC_5_1.Main.print_seq(A_seq);
+		System.out.println("A背包向量的密度");
+		System.out.println(KEP_SC_5_1.Main.get_DA(A_seq));
+		System.out.println("生成的M值,W值");
+		long[] M_W = KEP_SC_5_1.Main.createM_W(A_seq);
+		KEP_SC_5_1.Main.print_seq(M_W);
+		System.out.println("生成的B序列");
+		long[] B_seq = KEP_SC_5_1.Main.create_B_seq(A_seq, M_W);
+		KEP_SC_5_1.Main.print_seq(B_seq);
+		System.out.println("生成的P值,V值");
+		long[] P_V = KEP_SC_5_1.Main.createP_V(N);
+		KEP_SC_5_1.Main.print_seq(P_V);
+		System.out.println("随机生成的delta序列");
+		long[] delta = KEP_SC_5_1.Main.create_delta(N);
+		KEP_SC_5_1.Main.print_seq(delta);
+		System.out.println("生成的C值");
+		long[] C_seq = KEP_SC_5_1.Main.create_C_seq(N, A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(C_seq);
+		System.out.println("生成的M'");
+		long create_M_ni = KEP_SC_5_1.Main.create_M_ni(N, C_seq);
+		System.out.println(create_M_ni);
+
+		// 不同于KEP_SC_5_1的D值
+		long[] D_seq = KEP_SC_5_1.Main.create_D_seq(create_M_ni, C_seq);
+		long[] U_K_V = KEP_SC_5_1_2.Main.create_U_K_V(create_M_ni);
+		long[] R_seq = KEP_SC_5_1_2.Main.create_R_seq(N, create_M_ni, U_K_V);
+		System.out.println("生成的R值");
+		KEP_SC_5_1.Main.print_seq(R_seq);
+		System.out.println("生成的D值");
+		long[] D_seq1 = KEP_SC_5_1_2.Main.create_D_seq(D_seq, R_seq, create_M_ni);
+		KEP_SC_5_1.Main.print_seq(D_seq1);
+
+		// 不同于KEP_SC_5_1的L值
+		System.out.println("L0,L1的值");
+		long[] L_seq = KEP_SC_5_1_2.Main.create_L_seq(A_seq, delta, P_V, R_seq,create_M_ni,U_K_V);
+		KEP_SC_5_1.Main.print_seq(L_seq);
+		long w_ni = KEP_SC_5_1.Main.getW_ni(M_W[1], M_W[0]);
+		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
+		Thread.sleep(3000);
+		long[] create_source = new long[N];
+		for (String str : set) {
+			for (int i = 0; i < str.split(" ").length; i++) {
+				create_source[i] = Long.parseLong(str.split(" ")[i]);
+			}
+			KEP_SC_5_1.Main.print_seq(create_source);
+			long create_B_sum = KEP_SC_5_1.Main.create_B_sum(create_source, B_seq);
+			long create_K = KEP_SC_5_1.Main.create_K(create_source, D_seq1, create_M_ni);
+			System.out.println("SB值" + create_B_sum + ", K值" + create_K);
+			String encoderByMD5 = KEP_SC_5_1.Main.encoderByMD5(create_K + "");
+			// 改变递归求解方程
+			System.out.println(KEP_SC_5_1_2.Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, create_K,
+					create_B_sum, L_seq, U_K_V[0], U_K_V[1]));
+			System.out.println("---------------------------------");
+
+		}
+	}
+
+	public static void Test_KEP_SC_5_1_3(Set<String> set, int N, String methodName) throws Exception {
+		long[] A_seq = KEP_SC_5_1.Main.create_A_seq(N);
+		System.out.println("生成A序列");
+		KEP_SC_5_1.Main.print_seq(A_seq);
+		System.out.println("A背包向量的密度");
+		System.out.println(KEP_SC_5_1.Main.get_DA(A_seq));
+		System.out.println("生成的M值,W值");
+		long[] M_W = KEP_SC_5_1.Main.createM_W(A_seq);
+		KEP_SC_5_1.Main.print_seq(M_W);
+		System.out.println("生成的B序列");
+		long[] B_seq = KEP_SC_5_1.Main.create_B_seq(A_seq, M_W);
+		KEP_SC_5_1.Main.print_seq(B_seq);
+		System.out.println("生成的P值,V值");
+		long[] P_V = KEP_SC_5_1.Main.createP_V(N);
+		KEP_SC_5_1.Main.print_seq(P_V);
+		System.out.println("随机生成的delta序列");
+		long[] delta = KEP_SC_5_1.Main.create_delta(N);
+		KEP_SC_5_1.Main.print_seq(delta);
+		System.out.println("生成的C值");
+		long[] C_seq = KEP_SC_5_1.Main.create_C_seq(N, A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(C_seq);
+		System.out.println("生成的M'");
+		long create_M_ni = KEP_SC_5_1.Main.create_M_ni(N, C_seq);
+		System.out.println(create_M_ni);
+
+		// 不同于KEP_SC_5_1的D值
+		long[] D_seq = KEP_SC_5_1.Main.create_D_seq(create_M_ni, C_seq);
+
+		long[] E_seq = KEP_SC_5_1_1.Main.create_E_seq(N);
+		System.out.println("生成的D值");
+		long[] D_seq_1 = KEP_SC_5_1_1.Main.create_D_seq_1(D_seq, E_seq, create_M_ni);
+		KEP_SC_5_1.Main.print_seq(D_seq_1);
+
+		System.out.println("生成的E值");
+		KEP_SC_5_1.Main.print_seq(E_seq);
+
+		System.out.println("L0,L1的值");
+		long[] L_seq = KEP_SC_5_1_1.Main.create_L_seq(A_seq, delta, P_V, E_seq);
+		KEP_SC_5_1.Main.print_seq(L_seq);
+		long w_ni = KEP_SC_5_1.Main.getW_ni(M_W[1], M_W[0]);
+		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
+		Thread.sleep(3000);
+		long[] create_source = new long[N];
+		boolean flag = false;
+		long create_K = 0;
+		long L = 0;
+		long R = 0;
+		long Key = 0;
+		
+		for (String str : set) {
+			for (int i = 0; i < str.split(" ").length; i++) {
+				create_source[i] = Long.parseLong(str.split(" ")[i]);
+			}
+
+			KEP_SC_5_1.Main.print_seq(create_source);
+
+			create_K = KEP_SC_5_1.Main.create_K(create_source, D_seq_1, create_M_ni);
+			System.out.println("生成的K的值为" + create_K);
+			L = KEP_SC_5_1_3.Main.create_L(L_seq, N);
+			System.out.println("生成的L的值" + L);
+			R = (long) (create_K % (Math.pow(2, L)));
+			System.out.println("生成的R的值" + R);
+			Key = (long) (create_K / (Math.pow(2, L)));
+			if (R >= L_seq[1] && R + L_seq[0] < Math.pow(2, L)&&Key!=0) {
+				flag = true;
+			}
+			
+			if(flag){
+			long create_B_sum = KEP_SC_5_1.Main.create_B_sum(create_source, B_seq);
+			System.out.println("SB值" + create_B_sum + ", K值" + create_K);
+			String encoderByMD5 = KEP_SC_5_1.Main.encoderByMD5(Key + "");
+			System.out.println("Key值  "+Key+"  Hash(Key)"+encoderByMD5);
+			// 改变递归求解方程
+			System.out.println(
+					KEP_SC_5_1_3.Main.get_K_ni(w_ni, M_W[0], P_V[1], P_V[0], create_M_ni, Key, L, create_B_sum));
+			System.out.println("---------------------------------");
+			}else{
+				System.out.println("不满足条件的随机序列"+create_source+",继续下一次选取");
+			}
+		}
+
+	}
+
+	public static void Test_KEP_SC_5_1_4(Set<String> set, int N, String methodName) throws Exception {
+
+		long[] A_seq = KEP_SC_5_1.Main.create_A_seq(N);
+		System.out.println("生成A序列");
+		KEP_SC_5_1.Main.print_seq(A_seq);
+		System.out.println("A背包向量的密度");
+		System.out.println(KEP_SC_5_1.Main.get_DA(A_seq));
+		System.out.println("生成的M值,W值");
+		long[] M_W = KEP_SC_5_1.Main.createM_W(A_seq);
+		KEP_SC_5_1.Main.print_seq(M_W);
+		System.out.println("生成的B序列");
+		long[] B_seq = KEP_SC_5_1.Main.create_B_seq(A_seq, M_W);
+		KEP_SC_5_1.Main.print_seq(B_seq);
+		System.out.println("生成的P值,V值");
+		long[] P_V = KEP_SC_5_1.Main.createP_V(N);
+		KEP_SC_5_1.Main.print_seq(P_V);
+		System.out.println("随机生成的delta序列");
+		long[] delta = KEP_SC_5_1.Main.create_delta(N);
+		KEP_SC_5_1.Main.print_seq(delta);
+		System.out.println("生成的C值");
+		long[] C_seq = KEP_SC_5_1.Main.create_C_seq(N, A_seq, delta, P_V);
+		KEP_SC_5_1.Main.print_seq(C_seq);
+		System.out.println("生成的M'");
+		long create_M_ni = KEP_SC_5_1.Main.create_M_ni(N, C_seq);
+		System.out.println(create_M_ni);
+
+		long[] D_seq = KEP_SC_5_1.Main.create_D_seq(create_M_ni, C_seq);
+		
+		long[] U_K_V = KEP_SC_5_1_2.Main.create_U_K_V(create_M_ni);
+		System.out.println("u的值"+U_K_V[0] + ", k的值"+U_K_V[1]+ ", v的值"+U_K_V[2]);
+		
+		long[] R_seq =KEP_SC_5_1_2.Main.create_R_seq(N,create_M_ni,U_K_V);
+		System.out.println("生成的R序列");
+		KEP_SC_5_1.Main.print_seq(R_seq);
+		
+		long[] E_seq = KEP_SC_5_1_1.Main.create_E_seq(N);
+		System.out.println("生成的E值");
+		KEP_SC_5_1.Main.print_seq(E_seq);
+		long w_ni = KEP_SC_5_1.Main.getW_ni(M_W[1], M_W[0]);
+		System.out.println("[W' 满足 使得 (W*W')MOD M=1] --- " + w_ni);
+		System.out.println("生成的D值");
+		long[] D_seq_1=KEP_SC_5_1_4.Main.create_D_seq(D_seq, R_seq,E_seq, create_M_ni);
+		KEP_SC_5_1.Main.print_seq(D_seq_1);
+		System.out.println("L0,L1的值");
+		long [] L_seq = KEP_SC_5_1_4.Main.create_L_seq(A_seq, delta, P_V,R_seq,E_seq,create_M_ni,U_K_V);
+		KEP_SC_5_1.Main.print_seq(L_seq);
+		
+		boolean flag = false;
+		long create_K = 0;
+		long L = 0;
+		long R = 0;
+		long Key=0;
+		long[] create_source = new long[N];
+		for(String str:set){
+			for (int i = 0; i < str.split(" ").length; i++) {
+				create_source[i] = Long.parseLong(str.split(" ")[i]);
+			}
+
+			KEP_SC_5_1.Main.print_seq(create_source);
+			create_K = KEP_SC_5_1.Main.create_K(create_source, D_seq_1, create_M_ni);
+			System.out.println("生成的K的值为"+create_K);
+			L = KEP_SC_5_1_3.Main.create_L(L_seq,N);
+			System.out.println("生成的L的值"+L);
+			R = (long) (create_K % (Math.pow(2, L)));
+			System.out.println("生成的R的值"+R);
+			Key=(long)(create_K/(Math.pow(2, L)));
+			if (R >= L_seq[1] && R + L_seq[0] < Math.pow(2, L)&&Key!=0) {
+				flag = true;
+			}
+			if(flag){
+				long create_B_sum = KEP_SC_5_1.Main.create_B_sum(create_source, B_seq);
+				System.out.println("SB值" + create_B_sum + ", K值" + create_K);
+				String encoderByMD5 = KEP_SC_5_1.Main.encoderByMD5(Key + "");
+				System.out.println("Key值  "+Key+"  Hash(Key)"+encoderByMD5);
+				// 改变递归求解方程
+				System.out.println(
+						KEP_SC_5_1_4.Main.get_K_ni(w_ni,M_W[0], P_V[1], P_V[0], create_M_ni,  Key,create_B_sum, L_seq,  U_K_V[0],
+								U_K_V[1] , R,  L));
+				System.out.println("---------------------------------");
+				}else{
+					System.out.println("不满足条件的随机序列"+KEP_SC_5_1.Main.toValue(create_source) +",继续下一次选取");
+					System.out.println();
+				}
+			
+			
+		}
+		
+		
+	
 	}
 
 }
