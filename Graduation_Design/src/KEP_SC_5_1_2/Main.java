@@ -175,7 +175,7 @@ public class Main {
 			for (int j = 0; j <= k - 1; j++) {
 				K1 = (T - l0 + j * u) % M_ni;
 				if (KEP_SC_5_1.Main.encoderByMD5(K1 + "").equals(KEP_SC_5_1.Main.encoderByMD5(K + ""))) {
-					System.out.println("比较次数" + i);
+					System.out.println("比较次数:" + i);
 					return K1 + "";
 				} else {
 					i++;

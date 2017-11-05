@@ -431,7 +431,7 @@ public class Main {
 			
 			l1 = l1 + 1;
 			if (encoderByMD5(K1 + "").equals(encoderByMD5(K + ""))) {
-				System.out.println("比较次数" + i);
+				System.out.println("比较次数:" + i);
 				return K1 + "";
 			} else {
 				i++;
