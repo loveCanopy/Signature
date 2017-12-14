@@ -435,8 +435,6 @@ public class KEP_SC_5_1 {
 		return newstr;
 
 	}
-	
-	
 	/**
 	 * @return 寻找W' 使得 (W*W')MOD M=1
 	 * @throws Exception 
@@ -453,15 +451,21 @@ public class KEP_SC_5_1 {
 //		return W1;
 //	}
 
-	public static BigInteger get_w_ni(BigInteger W,BigInteger M){
-		BigInteger y=BigInteger.ONE;
-		BigInteger x=BigInteger.ONE;
-		while((M.multiply(y).add(BigInteger.ONE)).mod(W).compareTo(BigInteger.ZERO)!=0){
-			y=y.add(BigInteger.ONE);
-		}
-		return (M.multiply(y).add(BigInteger.ONE)).divide(W);
-	}
+//	public static BigInteger get_w_ni(BigInteger W,BigInteger M){
+//		BigInteger y=BigInteger.ONE;
+//		BigInteger x=BigInteger.ONE;
+//		while((M.multiply(y).add(BigInteger.ONE)).mod(W).compareTo(BigInteger.ZERO)!=0){
+//			y=y.add(BigInteger.ONE);
+//		}
+//		return (M.multiply(y).add(BigInteger.ONE)).divide(W);
+//	}
 	
+	//大整数BigInteger有现成的求逆函数
+	public static BigInteger get_w_ni(BigInteger W,BigInteger M){
+		
+		return W.modInverse(M);
+		
+	}
 	
 	
 	/**

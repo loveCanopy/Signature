@@ -19,8 +19,8 @@ public class KEP_SC_5_1_5 {
 	public static Random random=new Random();
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-
-		int Number = 20;
+		
+		int Number = 1024;
 		BigInteger[] A_seq = new BigInteger[Number];
 		BigInteger[] B_seq = new BigInteger[Number];
 		BigInteger[] C_seq = new BigInteger[Number];
